@@ -135,9 +135,18 @@ body {
 .subtitle {
   font-size: clamp(1rem, 2vw, 1.5rem);
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   font-weight: 300;
   letter-spacing: 1px;
+}
+
+.subsubtitle {
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 60px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .scroll-indicator {
@@ -470,6 +479,59 @@ body {
   background: rgba(0, 212, 255, 0.4);
   box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
   transform: scale(1.05);
+}
+
+/* STAGGER ANIMATIONS */
+.featured-card:nth-child(1) {
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.featured-card:nth-child(2) {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.featured-card:nth-child(3) {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.project-card:nth-child(n) {
+  animation: fadeInUp 0.6s ease-out calc(0.1s * var(--index, 0)) both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* HEADER WITH TITLE AND BACK BUTTON */
+.header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.portfolio-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #00d4ff;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* RESPONSIVE */

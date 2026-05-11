@@ -8,7 +8,8 @@ createApp({
       projects: {},
       lastScrollTime: 0,
       scrollCooldown: 800,
-      isScrolling: false
+      isScrolling: false,
+      touchStartY: 0
     };
   },
   computed: {
@@ -110,21 +111,73 @@ createApp({
       // GSAP animations for page content
       const currentSection = document.querySelectorAll('.page')[this.currentPage];
       if (currentSection) {
+        const cards = currentSection.querySelectorAll('.featured-card, .project-card');
+        const content = currentSection.querySelectorAll('.page-title, .error-container, .about-content, .hero-text');
+        
+        // Animate main content
         gsap.fromTo(
-          currentSection.querySelectorAll('.page-title, .featured-card, .project-card, .error-container'),
+          content,
           { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2 }
+          { opacity: 1, y: 0, duration: 0.6, delay: 0.1 }
+        );
+
+        // Stagger cards
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 40, rotateY: -10 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            rotateY: 0,
+            duration: 0.5, 
+            stagger: 0.08, 
+            delay: 0.2,
+            ease: 'power2.out'
+          }
         );
       }
+    },
+
+    setupCardHoverEffects() {
+      const cards = document.querySelectorAll('.featured-card, .project-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, { 
+            scale: 1.02, 
+            duration: 0.3, 
+            overwrite: 'auto' 
+          });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, { 
+            scale: 1, 
+            duration: 0.3, 
+            overwrite: 'auto' 
+          });
+        });
+      });
     },
 
     async loadProjects() {
       try {
         const response = await fetch('projects.json');
         this.projects = await response.json();
+        
+        // Setup card effects after projects load
+        this.$nextTick(() => {
+          this.setupCardHoverEffects();
+        });
       } catch (error) {
         console.error('Error loading projects:', error);
       }
+    }
+  },
+
+  watch: {
+    currentPage() {
+      this.$nextTick(() => {
+        this.setupCardHoverEffects();
+      });
     }
   },
 
@@ -138,7 +191,9 @@ createApp({
     window.addEventListener('touchend', this.handleTouchEnd);
 
     // Initial animation
-    this.animatePage();
+    this.$nextTick(() => {
+      this.animatePage();
+    });
   },
 
   beforeUnmount() {

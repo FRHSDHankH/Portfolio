@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Hank's Portfolio</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- Navigation Dots -->
+      <nav class="nav-dots">
+        <div class="dot" v-for="(page, idx) in pages" :key="idx" 
+             @click="currentPage = idx" 
+             :class="{ active: currentPage === idx }"
+             :title="page">
+        </div>
+      </nav>
+
+      <!-- Fullscreen Pages Container -->
+      <div class="pages-container" :style="{ transform: `translateY(-${currentPage * 100}vh)` }">
+        
+        <!-- HOME PAGE -->
+        <section class="page home-page">
+          <div class="page-content">
+            <div class="hero-text">
+              <h1 class="title">Hank's Portfolio</h1>
+              <p class="subtitle">A journey through code, creativity & continuous learning</p>
+              <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <div class="arrow">↓</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FEATURED PAGE -->
+        <section class="page featured-page">
+          <div class="page-content">
+            <h2 class="page-title">Featured Projects</h2>
+            <div class="featured-grid">
+              <a v-for="project in featuredProjects" :key="project.id" 
+                 :href="project.url" target="_blank"
+                 class="featured-card">
+                <div class="card-icon">{{ project.image }}</div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <span class="year-badge">{{ project.year }}</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- SENIOR PROJECTS PAGE -->
+        <section class="page senior-page">
+          <div class="page-content">
+            <h2 class="page-title">Senior Year</h2>
+            <div class="projects-grid">
+              <a v-for="project in projects.senior" :key="project.id" 
+                 :href="project.url" target="_blank"
+                 class="project-card">
+                <div class="card-header">
+                  <h3>{{ project.title }}</h3>
+                </div>
+                <p class="description">{{ project.description }}</p>
+                <div class="tags">
+                  <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- JUNIOR PROJECTS PAGE -->
+        <section class="page junior-page">
+          <div class="page-content">
+            <h2 class="page-title">Junior Year</h2>
+            <div class="projects-grid">
+              <a v-for="project in projects.junior" :key="project.id" 
+                 :href="project.url" target="_blank"
+                 class="project-card">
+                <div class="card-header">
+                  <h3>{{ project.title }}</h3>
+                </div>
+                <p class="description">{{ project.description }}</p>
+                <div class="tags">
+                  <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- SOPHOMORE PAGE (404 Fun) -->
+        <section class="page sophomore-page">
+          <div class="page-content">
+            <div class="error-container">
+              <div class="error-code">404</div>
+              <h2>{{ projects.sophomore.message }}</h2>
+              <p>{{ projects.sophomore.description }}</p>
+              <div class="error-messages">
+                <p v-for="msg in projects.sophomore.subMessages" :key="msg" class="error-msg">
+                  {{ msg }}
+                </p>
+              </div>
+              <div class="dog-emoji">🐕</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT PAGE -->
+        <section class="page about-page">
+          <div class="page-content">
+            <h2 class="page-title">About This Portfolio</h2>
+            <div class="about-content">
+              <p>This portfolio showcases my growth as a web developer from Junior through Senior year.</p>
+              <p>Built with <strong>Vue.js</strong>, <strong>GSAP</strong>, and modern web technologies.</p>
+              <div class="tech-stack">
+                <span class="tech-badge">HTML</span>
+                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Vue.js</span>
+                <span class="tech-badge">GSAP</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Main Script -->
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,253 @@
+{
+  "featured": [
+    {
+      "id": "jamissions",
+      "title": "JAMissions",
+      "year": "Senior",
+      "url": "https://frhsdhankh.github.io/JAMissions/",
+      "image": "🚀",
+      "description": "Mission control interface application"
+    },
+    {
+      "id": "parking",
+      "title": "Parking Spots MHS",
+      "year": "Senior",
+      "url": "https://frhsdhankh.github.io/ParkingSpotsMHS/",
+      "image": "🅿️",
+      "description": "Smart parking management system"
+    },
+    {
+      "id": "movieposter",
+      "title": "Movie Poster Gallery",
+      "year": "Senior",
+      "url": "https://frhsdhankh.github.io/MoviePosterGallery/",
+      "image": "🎬",
+      "description": "Interactive movie poster showcase"
+    }
+  ],
+  "senior": [
+    {
+      "id": "jamissions",
+      "title": "JAMissions",
+      "url": "https://frhsdhankh.github.io/JAMissions/",
+      "tags": ["JavaScript", "UI/UX"],
+      "description": "Mission control interface application"
+    },
+    {
+      "id": "parking",
+      "title": "Parking Spots MHS",
+      "url": "https://frhsdhankh.github.io/ParkingSpotsMHS/",
+      "tags": ["JavaScript", "Location Services"],
+      "description": "Smart parking management system"
+    },
+    {
+      "id": "carol",
+      "title": "Christmas CarolOke",
+      "url": "https://jcarmichael9.github.io/Christmas-CarolOke/",
+      "tags": ["Vue", "Audio"],
+      "description": "Interactive karaoke application"
+    },
+    {
+      "id": "movieposter",
+      "title": "Movie Poster Gallery",
+      "url": "https://frhsdhankh.github.io/MoviePosterGallery/",
+      "tags": ["API", "Gallery"],
+      "description": "Interactive movie poster showcase"
+    },
+    {
+      "id": "vuemastery",
+      "title": "Vue Mastery",
+      "url": "https://frhsdhankh.github.io/VueMastery/",
+      "tags": ["Vue.js", "Advanced"],
+      "description": "Vue.js mastery project"
+    },
+    {
+      "id": "slideshow",
+      "title": "Slideshow App",
+      "url": "https://frhsdhankh.github.io/SlideshowApp/",
+      "tags": ["JavaScript", "Animation"],
+      "description": "Dynamic slideshow with controls"
+    },
+    {
+      "id": "schedule",
+      "title": "JSON Schedules",
+      "url": "http://frhsdhankh.github.io/JSONSchedules/",
+      "tags": ["JSON", "Data Management"],
+      "description": "Schedule viewer using JSON"
+    },
+    {
+      "id": "ajax",
+      "title": "AJAX Basics",
+      "url": "https://frhsdhankh.github.io/2.02-AJAX-Basics/",
+      "tags": ["AJAX", "API"],
+      "description": "Asynchronous data loading fundamentals"
+    },
+    {
+      "id": "events",
+      "title": "Event Listeners Refresher",
+      "url": "https://frhsdhankh.github.io/1.03-Event-Listeners-Refresher/",
+      "tags": ["JavaScript", "Fundamentals"],
+      "description": "Event handling techniques"
+    },
+    {
+      "id": "arrays",
+      "title": "Arrays and Loops",
+      "url": "https://frhsdhankh.github.io/1.02-Arrays-and-Loops/",
+      "tags": ["JavaScript", "Fundamentals"],
+      "description": "Array manipulation and iteration"
+    },
+    {
+      "id": "functions",
+      "title": "Functions",
+      "url": "https://frhsdhankh.github.io/1.01-Functions/",
+      "tags": ["JavaScript", "Fundamentals"],
+      "description": "Function concepts and usage"
+    },
+    {
+      "id": "college",
+      "title": "College Recruitment Website",
+      "url": "https://frhsdhankh.github.io/CollegeRecruitmentWebsite/",
+      "tags": ["HTML", "CSS", "Web Design"],
+      "description": "Recruitment showcase website"
+    }
+  ],
+  "junior": [
+    {
+      "id": "littlebird",
+      "title": "Little Bird Toy Company",
+      "url": "https://frhsdhankh.github.io/LittleBirdToyCompany/",
+      "tags": ["HTML", "CSS", "E-commerce"],
+      "description": "Toy company website"
+    },
+    {
+      "id": "carsroster",
+      "title": "Cars Roster",
+      "url": "https://frhsdhankh.github.io/CarsRoster/roster.html",
+      "tags": ["JavaScript", "Objects"],
+      "description": "Car collection manager"
+    },
+    {
+      "id": "statefacts",
+      "title": "State Facts",
+      "url": "https://frhsdhankh.github.io/State-Facts-Objects-Practice/",
+      "tags": ["JavaScript", "Objects"],
+      "description": "Interactive state facts database"
+    },
+    {
+      "id": "aprilmonthly",
+      "title": "April Monthly - Camaro",
+      "url": "https://frhsdhankh.github.io/AprilMonthlyWebsite-Camaro/",
+      "tags": ["Web Design", "Showcase"],
+      "description": "Monthly themed website"
+    },
+    {
+      "id": "monthlygallery",
+      "title": "Monthly Website Gallery",
+      "url": "https://frhsdhankh.github.io/MonthlyWebsiteGallery/",
+      "tags": ["Gallery", "Showcase"],
+      "description": "Collection of monthly projects"
+    },
+    {
+      "id": "hankman",
+      "title": "Hankman",
+      "url": "https://frhsdhankh.github.io/Hankman/",
+      "tags": ["Game", "JavaScript"],
+      "description": "Hangman game implementation"
+    },
+    {
+      "id": "febmonthly",
+      "title": "Feb Monthly - Presidential Biography",
+      "url": "https://frhsdhankh.github.io/FebMonthlyWebsite-PresidentialBiography/index.html",
+      "tags": ["Biography", "History"],
+      "description": "Presidential biography showcase"
+    },
+    {
+      "id": "todolist",
+      "title": "To-Do List",
+      "url": "https://frhsdhankh.github.io/ToDoList/",
+      "tags": ["JavaScript", "Todo"],
+      "description": "Task management application"
+    },
+    {
+      "id": "postcard",
+      "title": "Postcard Generator",
+      "url": "https://frhsdhankh.github.io/Postcard-Generator/",
+      "tags": ["Generator", "Creative"],
+      "description": "Postcard creation tool"
+    },
+    {
+      "id": "testimonial",
+      "title": "Random Testimonial",
+      "url": "https://frhsdhankh.github.io/RandomTestamonialStarter/",
+      "tags": ["Random", "API"],
+      "description": "Random testimonial generator"
+    },
+    {
+      "id": "janmonthly",
+      "title": "Jan Monthly - RPS Game",
+      "url": "https://frhsdhankh.github.io/JanMonthlyWebsite-RPSGame/",
+      "tags": ["Game", "AI"],
+      "description": "Rock Paper Scissors game"
+    },
+    {
+      "id": "decmonthly",
+      "title": "Dec Monthly - Name Generator",
+      "url": "https://frhsdhankh.github.io/DecMonthlyWebsite-NameGenerator/",
+      "tags": ["Generator", "Utility"],
+      "description": "Random name generation tool"
+    },
+    {
+      "id": "eightball",
+      "title": "Magic Eight Ball",
+      "url": "https://frhsdhankh.github.io/MagicEightBall/",
+      "tags": ["Game", "Random"],
+      "description": "Magic Eight Ball fortune teller"
+    },
+    {
+      "id": "novmonthly",
+      "title": "Nov Monthly - Word Salad",
+      "url": "https://frhsdhankh.github.io/NovMonthlyWebsite-WordSalad/",
+      "tags": ["Game", "Utility"],
+      "description": "Word salad generator"
+    },
+    {
+      "id": "spookyghost",
+      "title": "Spooky Ghost",
+      "url": "https://frhsdhankh.github.io/SpookyGhost/",
+      "tags": ["Halloween", "Animation"],
+      "description": "Spooky ghost animation"
+    },
+    {
+      "id": "spider",
+      "title": "Cute Spider",
+      "url": "https://frhsdhankh.github.io/CuteSpider/",
+      "tags": ["Halloween", "Animation"],
+      "description": "Cute spider animation"
+    },
+    {
+      "id": "octmonthly",
+      "title": "Oct Monthly - Look Ma I'm Famous",
+      "url": "https://frhsdhankh.github.io/OctMonthlyWebsite-LookMaImFamous/",
+      "tags": ["Celebrity", "Showcase"],
+      "description": "Celebrity showcase website"
+    },
+    {
+      "id": "summer",
+      "title": "Summer-tainment Site",
+      "url": "https://frhsdhankh.github.io/Summer-tainment-Site/",
+      "tags": ["Summer", "Entertainment"],
+      "description": "Summer entertainment showcase"
+    }
+  ],
+  "sophomore": {
+    "title": "Sophomore Year Projects",
+    "message": "🐕 My Dog Ate My Homework! 🐕",
+    "description": "Unfortunately, all my sophomore year projects have been mysteriously deleted. My dog may or may not have eaten them. 🍝",
+    "subMessages": [
+      "404: Files Not Found",
+      "Status: Lost in the Sauce",
+      "Error: Homework.exe has stopped responding",
+      "My bad, bro."
+    ]
+  }
+}

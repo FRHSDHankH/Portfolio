@@ -68,6 +68,18 @@ createApp({
             this.animatePage();
           }
           break;
+        case 'End':
+          e.preventDefault();
+          this.currentPage = this.pages.length - 1;
+          this.lastScrollTime = Date.now();
+          this.animatePage();
+          break;
+        case 'Home':
+          e.preventDefault();
+          this.currentPage = 0;
+          this.lastScrollTime = Date.now();
+          this.animatePage();
+          break;
       }
     },
 

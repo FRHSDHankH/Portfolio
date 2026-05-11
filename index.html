@@ -79,6 +79,9 @@
                  class="project-card">
                 <div class="card-header">
                   <h3>{{ project.title }}</h3>
+                  <span class="difficulty-badge" :class="project.difficulty.toLowerCase()">
+                    {{ project.difficulty }}
+                  </span>
                 </div>
                 <p class="description">{{ project.description }}</p>
                 <div class="tags">
@@ -99,6 +102,9 @@
                  class="project-card">
                 <div class="card-header">
                   <h3>{{ project.title }}</h3>
+                  <span class="difficulty-badge" :class="project.difficulty.toLowerCase()">
+                    {{ project.difficulty }}
+                  </span>
                 </div>
                 <p class="description">{{ project.description }}</p>
                 <div class="tags">

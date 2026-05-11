@@ -9,6 +9,14 @@
 
   <body>
     <div id="app">
+      <!-- Progress Bar -->
+      <div class="progress-bar" :style="{ width: (currentPage / (pages.length - 1) * 100) + '%' }"></div>
+
+      <!-- Page Counter -->
+      <div class="page-counter">
+        <span>{{ currentPage + 1 }} / {{ pages.length }}</span>
+      </div>
+
       <!-- Navigation Dots -->
       <nav class="nav-dots">
         <div class="dot" v-for="(page, idx) in pages" :key="idx" 

@@ -124,29 +124,44 @@ createApp({
       // GSAP animations for page content
       const currentSection = document.querySelectorAll('.page')[this.currentPage];
       if (currentSection) {
+        // Fade out previous content
+        gsap.to('.page:not(:nth-child(' + (this.currentPage + 1) + '))', {
+          opacity: 0,
+          duration: 0.3,
+          pointerEvents: 'none'
+        });
+
         const cards = currentSection.querySelectorAll('.featured-card, .project-card');
         const content = currentSection.querySelectorAll('.page-title, .error-container, .about-content, .hero-text');
         
-        // Animate main content
+        // Animate main content with stagger
         gsap.fromTo(
           content,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.6, delay: 0.1 }
+          { opacity: 0, y: 30, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: 0.1, ease: 'power3.out' }
         );
 
-        // Stagger cards
+        // Stagger cards with rotation
         gsap.fromTo(
           cards,
-          { opacity: 0, y: 40, rotateY: -10 },
+          { opacity: 0, y: 40, rotateY: -10, rotateX: 5 },
           { 
             opacity: 1, 
             y: 0, 
             rotateY: 0,
+            rotateX: 0,
             duration: 0.5, 
             stagger: 0.08, 
             delay: 0.2,
             ease: 'power2.out'
           }
+        );
+
+        // Add a subtle parallax effect to page backgrounds
+        gsap.fromTo(
+          currentSection,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.4, delay: 0 }
         );
       }
     },

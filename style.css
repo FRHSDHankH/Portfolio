@@ -317,6 +317,24 @@ body {
   color: inherit;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.project-card:hover::before {
+  left: 100%;
 }
 
 .project-card:hover {
@@ -327,6 +345,8 @@ body {
 
 .card-header {
   margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
 }
 
 .card-header h3 {
@@ -341,12 +361,16 @@ body {
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 15px;
   flex-grow: 1;
+  position: relative;
+  z-index: 2;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  position: relative;
+  z-index: 2;
 }
 
 .tag {
@@ -358,6 +382,12 @@ body {
   font-size: 0.75rem;
   font-weight: 600;
   border: 1px solid rgba(0, 212, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background: rgba(0, 212, 255, 0.3);
+  border-color: rgba(0, 212, 255, 0.6);
 }
 
 /* SOPHOMORE PAGE */

@@ -224,11 +224,17 @@ createApp({
   mounted() {
     this.loadProjects();
 
+    // Store bound methods for later removal
+    this._handleWheelBound = (e) => this.handleWheel(e);
+    this._handleKeyDownBound = (e) => this.handleKeyDown(e);
+    this._handleTouchStartBound = (e) => this.handleTouchStart(e);
+    this._handleTouchEndBound = (e) => this.handleTouchEnd(e);
+
     // Scroll and keyboard listeners
-    window.addEventListener('wheel', this.handleWheel, { passive: false });
-    window.addEventListener('keydown', this.handleKeyDown);
-    window.addEventListener('touchstart', this.handleTouchStart);
-    window.addEventListener('touchend', this.handleTouchEnd);
+    window.addEventListener('wheel', this._handleWheelBound, { passive: false });
+    window.addEventListener('keydown', this._handleKeyDownBound);
+    window.addEventListener('touchstart', this._handleTouchStartBound);
+    window.addEventListener('touchend', this._handleTouchEndBound);
 
     // Initial animation
     this.$nextTick(() => {
@@ -237,9 +243,9 @@ createApp({
   },
 
   beforeUnmount() {
-    window.removeEventListener('wheel', this.handleWheel);
-    window.removeEventListener('keydown', this.handleKeyDown);
-    window.removeEventListener('touchstart', this.handleTouchStart);
-    window.removeEventListener('touchend', this.handleTouchEnd);
+    window.removeEventListener('wheel', this._handleWheelBound);
+    window.removeEventListener('keydown', this._handleKeyDownBound);
+    window.removeEventListener('touchstart', this._handleTouchStartBound);
+    window.removeEventListener('touchend', this._handleTouchEndBound);
   }
 }).mount('#app');

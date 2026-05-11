@@ -7,6 +7,8 @@ createApp({
       pages: ['Home', 'Featured', 'Senior', 'Junior', 'Sophomore', 'About'],
       projects: {},
       projectsLoaded: false,
+      seniorFilter: null,
+      juniorFilter: null,
       lastScrollTime: 0,
       scrollCooldown: 800,
       isScrolling: false,
@@ -16,6 +18,14 @@ createApp({
   computed: {
     featuredProjects() {
       return this.projects.featured || [];
+    },
+    filteredSenior() {
+      if (!this.seniorFilter) return this.projects.senior || [];
+      return (this.projects.senior || []).filter(p => p.difficulty === this.seniorFilter);
+    },
+    filteredJunior() {
+      if (!this.juniorFilter) return this.projects.junior || [];
+      return (this.projects.junior || []).filter(p => p.difficulty === this.juniorFilter);
     }
   },
   methods: {

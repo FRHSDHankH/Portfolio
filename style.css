@@ -237,6 +237,41 @@ body {
   border-radius: 2px;
 }
 
+/* FILTER CONTROLS */
+.filter-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  animation: slideInDown 0.6s ease-out;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+}
+
+.filter-btn:hover {
+  border-color: rgba(0, 212, 255, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.filter-btn.active {
+  background: rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
+  border-color: rgba(0, 212, 255, 0.7);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+}
+
 /* FEATURED PAGE */
 .featured-page {
   background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);

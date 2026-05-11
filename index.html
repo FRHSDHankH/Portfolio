@@ -73,8 +73,14 @@
         <section class="page senior-page">
           <div class="page-content">
             <h2 class="page-title">Senior Year</h2>
+            <div class="filter-controls">
+              <button class="filter-btn" :class="{ active: !seniorFilter }" @click="seniorFilter = null">All</button>
+              <button class="filter-btn" :class="{ active: seniorFilter === 'Beginner' }" @click="seniorFilter = 'Beginner'">Beginner</button>
+              <button class="filter-btn" :class="{ active: seniorFilter === 'Intermediate' }" @click="seniorFilter = 'Intermediate'">Intermediate</button>
+              <button class="filter-btn" :class="{ active: seniorFilter === 'Advanced' }" @click="seniorFilter = 'Advanced'">Advanced</button>
+            </div>
             <div class="projects-grid">
-              <a v-for="project in projects.senior" :key="project.id" 
+              <a v-for="project in filteredSenior" :key="project.id" 
                  :href="project.url" target="_blank"
                  class="project-card">
                 <div class="card-header">
@@ -96,8 +102,14 @@
         <section class="page junior-page">
           <div class="page-content">
             <h2 class="page-title">Junior Year</h2>
+            <div class="filter-controls">
+              <button class="filter-btn" :class="{ active: !juniorFilter }" @click="juniorFilter = null">All</button>
+              <button class="filter-btn" :class="{ active: juniorFilter === 'Beginner' }" @click="juniorFilter = 'Beginner'">Beginner</button>
+              <button class="filter-btn" :class="{ active: juniorFilter === 'Intermediate' }" @click="juniorFilter = 'Intermediate'">Intermediate</button>
+              <button class="filter-btn" :class="{ active: juniorFilter === 'Advanced' }" @click="juniorFilter = 'Advanced'">Advanced</button>
+            </div>
             <div class="projects-grid">
-              <a v-for="project in projects.junior" :key="project.id" 
+              <a v-for="project in filteredJunior" :key="project.id" 
                  :href="project.url" target="_blank"
                  class="project-card">
                 <div class="card-header">

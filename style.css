@@ -475,8 +475,20 @@ body {
   max-width: 700px;
 }
 
+.about-section {
+  margin-bottom: 40px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.about-section h3 {
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
 .about-content p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.8;
   margin-bottom: 30px;
   color: rgba(255, 255, 255, 0.9);
@@ -512,7 +524,45 @@ body {
 }
 
 /* STAGGER ANIMATIONS */
-.featured-card:nth-child(1) {
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeOut 0.3s ease-out 2s forwards;
+}
+
+.loading-content {
+  text-align: center;
+  color: white;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
   animation: fadeInUp 0.6s ease-out 0.1s both;
 }
 

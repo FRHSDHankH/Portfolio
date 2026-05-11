@@ -18,6 +18,14 @@
         </div>
       </nav>
 
+      <!-- Loading Screen -->
+      <div v-if="!projectsLoaded" class="loading-screen">
+        <div class="loading-content">
+          <div class="loader"></div>
+          <p>Loading portfolio...</p>
+        </div>
+      </div>
+
       <!-- Fullscreen Pages Container -->
       <div class="pages-container" :style="{ transform: `translateY(-${currentPage * 100}vh)` }">
         
@@ -115,14 +123,21 @@
           <div class="page-content">
             <h2 class="page-title">About This Portfolio</h2>
             <div class="about-content">
-              <p>This portfolio showcases my growth as a web developer from Junior through Senior year.</p>
-              <p>Built with <strong>Vue.js</strong>, <strong>GSAP</strong>, and modern web technologies.</p>
+              <div class="about-section">
+                <h3>Development Journey</h3>
+                <p>This portfolio showcases my growth as a web developer from Junior through Senior year. Spanning multiple years of coursework, projects, and continuous learning.</p>
+              </div>
+              <div class="about-section">
+                <h3>Built With Modern Tech</h3>
+                <p>Built with cutting-edge web technologies including Vue.js, GSAP animations, modern CSS, and responsive design principles. Featuring smooth full-page navigation and interactive animations.</p>
+              </div>
               <div class="tech-stack">
-                <span class="tech-badge">HTML</span>
-                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3</span>
                 <span class="tech-badge">JavaScript</span>
                 <span class="tech-badge">Vue.js</span>
                 <span class="tech-badge">GSAP</span>
+                <span class="tech-badge">JSON</span>
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ createApp({
       currentPage: 0,
       pages: ['Home', 'Featured', 'Senior', 'Junior', 'Sophomore', 'About'],
       projects: {},
+      projectsLoaded: false,
       lastScrollTime: 0,
       scrollCooldown: 800,
       isScrolling: false,
@@ -162,6 +163,7 @@ createApp({
       try {
         const response = await fetch('projects.json');
         this.projects = await response.json();
+        this.projectsLoaded = true;
         
         // Setup card effects after projects load
         this.$nextTick(() => {
@@ -169,6 +171,7 @@ createApp({
         });
       } catch (error) {
         console.error('Error loading projects:', error);
+        this.projectsLoaded = true; // Show portfolio even if load fails
       }
     }
   },

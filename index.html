@@ -35,10 +35,10 @@
       </div>
 
       <!-- Fullscreen Pages Container -->
-      <div class="pages-container" :style="{ transform: `translateY(-${currentPage * 100}vh)` }">
+      <div class="pages-container">
         
       <!-- HOME PAGE -->
-        <section class="page home-page">
+        <section class="page home-page" :class="{ active: currentPage === 0 }">
           <div class="page-content">
             <div class="hero-text">
               <h1 class="title">Hank's Portfolio</h1>
@@ -53,7 +53,7 @@
         </section>
 
         <!-- FEATURED PAGE -->
-        <section class="page featured-page">
+        <section class="page featured-page" :class="{ active: currentPage === 1 }">
           <div class="page-content">
             <h2 class="page-title">Featured Projects</h2>
             <div class="featured-grid">
@@ -70,7 +70,7 @@
         </section>
 
         <!-- SENIOR PROJECTS PAGE -->
-        <section class="page senior-page">
+        <section class="page senior-page" :class="{ active: currentPage === 2 }">
           <div class="page-content">
             <h2 class="page-title">Senior Year</h2>
             <div class="filter-controls">
@@ -99,7 +99,7 @@
         </section>
 
         <!-- JUNIOR PROJECTS PAGE -->
-        <section class="page junior-page">
+        <section class="page junior-page" :class="{ active: currentPage === 3 }">
           <div class="page-content">
             <h2 class="page-title">Junior Year</h2>
             <div class="filter-controls">
@@ -128,13 +128,14 @@
         </section>
 
         <!-- SOPHOMORE PAGE (404 Fun) -->
-        <section class="page sophomore-page">
+        <section class="page sophomore-page" :class="{ active: currentPage === 4 }">
           <div class="page-content">
             <div class="error-container">
               <div class="error-code">404</div>
-              <h2>{{ projects.sophomore.message }}</h2>
-              <p>{{ projects.sophomore.description }}</p>
-              <div class="error-messages">
+              <h2 v-if="projects.sophomore">{{ projects.sophomore.message }}</h2>
+              <h2 v-else>Loading...</h2>
+              <p v-if="projects.sophomore">{{ projects.sophomore.description }}</p>
+              <div class="error-messages" v-if="projects.sophomore">
                 <p v-for="msg in projects.sophomore.subMessages" :key="msg" class="error-msg">
                   {{ msg }}
                 </p>
@@ -145,7 +146,7 @@
         </section>
 
         <!-- ABOUT PAGE -->
-        <section class="page about-page">
+        <section class="page about-page" :class="{ active: currentPage === 5 }">
           <div class="page-content">
             <h2 class="page-title">About This Portfolio</h2>
             <div class="about-content">

@@ -93,7 +93,7 @@ body {
   width: 100%;
   height: 100vh;
   position: relative;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Remove transform transition - we'll handle animations with GSAP */
 }
 
 .page {
@@ -102,8 +102,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   overflow: hidden;
+  /* Initially hide all pages except the first */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .page-content {

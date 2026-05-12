@@ -5,12 +5,17 @@ createApp({
     return {
       currentPage: 0,
       pages: ['Home', 'Featured', 'Senior', 'Junior', 'Sophomore', 'About'],
-      projects: {},
+      projects: {
+        featured: [],
+        senior: [],
+        junior: [],
+        sophomore: null
+      },
       projectsLoaded: false,
       seniorFilter: null,
       juniorFilter: null,
       lastScrollTime: 0,
-      scrollCooldown: 800,
+      scrollCooldown: 1200, // Increased for longer flying animations
       isScrolling: false,
       touchStartY: 0
     };
@@ -26,6 +31,11 @@ createApp({
     filteredJunior() {
       if (!this.juniorFilter) return this.projects.junior || [];
       return (this.projects.junior || []).filter(p => p.difficulty === this.juniorFilter);
+    },
+    pageClasses() {
+      return this.pages.map((page, index) => ({
+        active: index === this.currentPage
+      }));
     }
   },
   methods: {
@@ -129,52 +139,201 @@ createApp({
       this.isScrolling = true;
       setTimeout(() => {
         this.isScrolling = false;
-      }, 800);
+      }, 1200); // Match scroll cooldown
 
-      // GSAP animations for page content
+      // Remove active class from all pages
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+
+      // Add active class to current page
       const currentSection = document.querySelectorAll('.page')[this.currentPage];
       if (currentSection) {
-        // Fade out previous content
-        gsap.to('.page:not(:nth-child(' + (this.currentPage + 1) + '))', {
-          opacity: 0,
-          duration: 0.3,
-          pointerEvents: 'none'
-        });
-
-        const cards = currentSection.querySelectorAll('.featured-card, .project-card');
-        const content = currentSection.querySelectorAll('.page-title, .error-container, .about-content, .hero-text');
+        currentSection.classList.add('active');
         
-        // Animate main content with stagger
-        gsap.fromTo(
-          content,
-          { opacity: 0, y: 30, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: 0.1, ease: 'power3.out' }
-        );
-
-        // Stagger cards with rotation
-        gsap.fromTo(
-          cards,
-          { opacity: 0, y: 40, rotateY: -10, rotateX: 5 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            rotateY: 0,
-            rotateX: 0,
-            duration: 0.5, 
-            stagger: 0.08, 
-            delay: 0.2,
-            ease: 'power2.out'
-          }
-        );
-
-        // Add a subtle parallax effect to page backgrounds
-        gsap.fromTo(
-          currentSection,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.4, delay: 0 }
-        );
+        // Create flying entrance animation based on page type
+        this.animatePageEntrance(currentSection, this.pages[this.currentPage]);
       }
     },
+
+    animatePageEntrance(pageElement, pageName) {
+      const cards = pageElement.querySelectorAll('.featured-card, .project-card');
+      const content = pageElement.querySelectorAll('.page-title, .error-container, .about-content, .hero-text');
+      const pageContent = pageElement.querySelector('.page-content');
+
+      // Reset any existing animations
+      gsap.set([cards, content, pageContent], { clearProps: 'all' });
+
+      // Different flying animations for each page
+      switch(pageName) {
+        case 'Home':
+          this.animateHomePage(content, cards);
+          break;
+        case 'Featured':
+          this.animateFeaturedPage(content, cards);
+          break;
+        case 'Senior':
+          this.animateSeniorPage(content, cards);
+          break;
+        case 'Junior':
+          this.animateJuniorPage(content, cards);
+          break;
+        case 'Sophomore':
+          this.animateSophomorePage(content);
+          break;
+        case 'About':
+          this.animateAboutPage(content);
+          break;
+      }
+    },
+
+    animateHomePage(content, cards) {
+      // Hero text flies in from top with rotation
+      gsap.fromTo(content, 
+        { y: -100, rotation: -15, opacity: 0, scale: 0.8 },
+        { y: 0, rotation: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }
+      );
+    },
+
+    animateFeaturedPage(content, cards) {
+      // Title flies in from left
+      gsap.fromTo(content, 
+        { x: -200, opacity: 0, rotationY: -90 },
+        { x: 0, opacity: 1, rotationY: 0, duration: 0.6, ease: 'power3.out' }
+      );
+      
+      // Cards fly in from different directions with stagger
+      cards.forEach((card, index) => {
+        const directions = [
+          { x: -300, y: -100, rotation: -45 },
+          { x: 300, y: -100, rotation: 45 },
+          { x: -300, y: 100, rotation: -45 }
+        ];
+        const dir = directions[index % directions.length];
+        
+        gsap.fromTo(card,
+          { x: dir.x, y: dir.y, rotation: dir.rotation, opacity: 0, scale: 0.5 },
+          { x: 0, y: 0, rotation: 0, opacity: 1, scale: 1, duration: 0.7, delay: 0.2 + index * 0.1, ease: 'back.out(1.5)' }
+        );
+      });
+    },
+
+    animateSeniorPage(content, cards) {
+      // Title bounces in from bottom
+      gsap.fromTo(content, 
+        { y: 150, opacity: 0, scaleY: 0.3 },
+        { y: 0, opacity: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1, 0.3)' }
+      );
+      
+      // Cards spiral in
+      cards.forEach((card, index) => {
+        gsap.fromTo(card,
+          { 
+            x: Math.cos(index * 0.5) * 400, 
+            y: Math.sin(index * 0.5) * 400, 
+            rotation: index * 45, 
+            opacity: 0,
+            scale: 0.3
+          },
+          { 
+            x: 0, 
+            y: 0, 
+            rotation: 0, 
+            opacity: 1, 
+            scale: 1, 
+            duration: 0.8, 
+            delay: 0.3 + index * 0.05, 
+            ease: 'power4.out' 
+          }
+        );
+      });
+    },
+
+    animateJuniorPage(content, cards) {
+      // Title zooms in with 3D effect
+      gsap.fromTo(content, 
+        { scale: 3, rotationX: -180, opacity: 0, z: -500 },
+        { scale: 1, rotationX: 0, opacity: 1, z: 0, duration: 0.8, ease: 'power3.out' }
+      );
+      
+      // Cards fly in from corners
+      const corners = [
+        { x: -400, y: -300 },
+        { x: 400, y: -300 },
+        { x: -400, y: 300 },
+        { x: 400, y: 300 }
+      ];
+      
+      cards.forEach((card, index) => {
+        const corner = corners[index % corners.length];
+        gsap.fromTo(card,
+          { x: corner.x, y: corner.y, rotation: 180, opacity: 0, scale: 0.2 },
+          { x: 0, y: 0, rotation: 0, opacity: 1, scale: 1, duration: 0.6, delay: 0.4 + index * 0.08, ease: 'back.out(1.2)' }
+        );
+      });
+    },
+
+    animateSophomorePage(content) {
+      // 404 error flies in with glitch effect
+      gsap.fromTo(content, 
+        { 
+          x: () => Math.random() * 100 - 50, 
+          y: () => Math.random() * 100 - 50,
+          rotation: () => Math.random() * 20 - 10,
+          opacity: 0,
+          scale: 0.5
+        },
+        { 
+          x: 0, 
+          y: 0, 
+          rotation: 0, 
+          opacity: 1, 
+          scale: 1, 
+          duration: 0.5, 
+          ease: 'power2.out',
+          onComplete: () => {
+            // Add subtle glitch animation
+            gsap.to(content, {
+              x: 'random(-2, 2)',
+              y: 'random(-2, 2)',
+              duration: 0.1,
+              repeat: 5,
+              yoyo: true,
+              ease: 'power2.inOut',
+              delay: 1
+            });
+          }
+        }
+      );
+    },
+
+    animateAboutPage(content) {
+      // Content flies in from all sides
+      const elements = Array.from(content);
+      elements.forEach((element, index) => {
+        const angle = (index / elements.length) * Math.PI * 2;
+        const distance = 300;
+        gsap.fromTo(element,
+          { 
+            x: Math.cos(angle) * distance, 
+            y: Math.sin(angle) * distance,
+            rotation: angle * 180 / Math.PI,
+            opacity: 0,
+            scale: 0.3
+          },
+          { 
+            x: 0, 
+            y: 0, 
+            rotation: 0, 
+            opacity: 1, 
+            scale: 1, 
+            duration: 0.7, 
+            delay: index * 0.1, 
+            ease: 'power3.out' 
+          }
+        );
+      });
+    }
 
     setupCardHoverEffects() {
       const cards = document.querySelectorAll('.featured-card, .project-card');
@@ -199,7 +358,16 @@ createApp({
     async loadProjects() {
       try {
         const response = await fetch('projects.json');
-        this.projects = await response.json();
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        this.projects = {
+          featured: data.featured || [],
+          senior: data.senior || [],
+          junior: data.junior || [],
+          sophomore: data.sophomore || null
+        };
         this.projectsLoaded = true;
         
         // Setup card effects after projects load
@@ -208,6 +376,13 @@ createApp({
         });
       } catch (error) {
         console.error('Error loading projects:', error);
+        // Set default empty data to prevent errors
+        this.projects = {
+          featured: [],
+          senior: [],
+          junior: [],
+          sophomore: null
+        };
         this.projectsLoaded = true; // Show portfolio even if load fails
       }
     }

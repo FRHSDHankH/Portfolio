@@ -179,9 +179,15 @@
     </div>
 
     <!-- Vue 3 -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.js"></script>
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Test script -->
+    <script>
+      console.log('Scripts loaded');
+      console.log('Vue available:', typeof Vue);
+      console.log('GSAP available:', typeof gsap);
+    </script>
     <!-- Main Script -->
     <script src="script.js"></script>
   </body>

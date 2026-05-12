@@ -111,6 +111,11 @@ body {
   pointer-events: none;
 }
 
+.page:first-child {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .page.active {
   opacity: 1;
   pointer-events: auto;

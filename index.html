@@ -9,25 +9,6 @@
 
   <body>
     <div id="app">
-      <!-- Progress Bar -->
-      <div class="progress-bar" :style="{ width: (currentPage / (pages.length - 1) * 100) + '%' }"></div>
-
-      <!-- Page Counter -->
-      <div class="page-counter">
-        <span>{{ currentPage + 1 }} / {{ pages.length }}</span>
-        <br>
-        <span>{{ message }}</span>
-      </div>
-
-      <!-- Navigation Dots -->
-      <nav class="nav-dots">
-        <div class="dot" v-for="(page, idx) in pages" :key="idx" 
-             @click="currentPage = idx" 
-             :class="{ active: currentPage === idx }"
-             :title="page">
-        </div>
-      </nav>
-
       <!-- Loading Screen -->
       <div v-if="!projectsLoaded" class="loading-screen">
         <div class="loading-content">
@@ -174,14 +155,10 @@
 
       </div>
 
-      <!-- Keyboard Shortcuts Hint -->
-      <div class="shortcuts-hint">
-        <p>↑↓ or Space to navigate • Click dots to jump</p>
-      </div>
     </div>
 
-    <!-- Vue 3 -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.js"></script>
+    <!-- Vue 3 (production build for deployment) -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js"></script>
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <!-- Test script -->

@@ -26,7 +26,7 @@
             <div class="hero-text">
               <h1 class="title">Hank's Portfolio</h1>
               <p class="subtitle">A journey through code, creativity & continuous learning</p>
-              <p class="subsubtitle">Senior • Class of 2024</p>
+              <p class="subsubtitle">Senior • Class of 2026</p>
               <div class="scroll-indicator">
                 <span>Scroll to explore</span>
                 <div class="arrow">↓</div>
@@ -63,7 +63,7 @@
               <button class="filter-btn" :class="{ active: seniorFilter === 'Advanced' }" @click="seniorFilter = 'Advanced'">Advanced</button>
             </div>
             <div class="projects-grid">
-              <a v-for="project in filteredSenior" :key="project.id" 
+              <a v-for="project in visibleSenior" :key="project.id" 
                  :href="project.url" target="_blank"
                  class="project-card">
                 <div class="card-header">
@@ -77,6 +77,11 @@
                   <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
                 </div>
               </a>
+            </div>
+            <div class="page-pagination">
+              <button class="page-nav-btn" @click="prevSeniorPage" :disabled="seniorPage === 0">Prev</button>
+              <span class="page-status">Page {{ seniorPage + 1 }} / {{ seniorPageCount }}</span>
+              <button class="page-nav-btn" @click="nextSeniorPage" :disabled="seniorPage >= seniorPageCount - 1">Next</button>
             </div>
           </div>
         </section>
@@ -92,7 +97,7 @@
               <button class="filter-btn" :class="{ active: juniorFilter === 'Advanced' }" @click="juniorFilter = 'Advanced'">Advanced</button>
             </div>
             <div class="projects-grid">
-              <a v-for="project in filteredJunior" :key="project.id" 
+              <a v-for="project in visibleJunior" :key="project.id" 
                  :href="project.url" target="_blank"
                  class="project-card">
                 <div class="card-header">
@@ -106,6 +111,11 @@
                   <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
                 </div>
               </a>
+            </div>
+            <div class="page-pagination">
+              <button class="page-nav-btn" @click="prevJuniorPage" :disabled="juniorPage === 0">Prev</button>
+              <span class="page-status">Page {{ juniorPage + 1 }} / {{ juniorPageCount }}</span>
+              <button class="page-nav-btn" @click="nextJuniorPage" :disabled="juniorPage >= juniorPageCount - 1">Next</button>
             </div>
           </div>
         </section>

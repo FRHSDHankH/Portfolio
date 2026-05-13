@@ -19,6 +19,9 @@ createApp({
       projectsLoaded: false,
       seniorFilter: null,
       juniorFilter: null,
+      seniorPage: 0,
+      juniorPage: 0,
+      cardsPerPage: 6,
       isTransitioning: false
     };
   },
@@ -33,11 +36,45 @@ createApp({
     filteredJunior() {
       if (!this.juniorFilter) return this.projects.junior || [];
       return (this.projects.junior || []).filter(p => p.difficulty === this.juniorFilter);
+    },
+    visibleSenior() {
+      const all = this.filteredSenior;
+      const start = this.seniorPage * this.cardsPerPage;
+      return all.slice(start, start + this.cardsPerPage);
+    },
+    seniorPageCount() {
+      return Math.max(1, Math.ceil(this.filteredSenior.length / this.cardsPerPage));
+    },
+    visibleJunior() {
+      const all = this.filteredJunior;
+      const start = this.juniorPage * this.cardsPerPage;
+      return all.slice(start, start + this.cardsPerPage);
+    },
+    juniorPageCount() {
+      return Math.max(1, Math.ceil(this.filteredJunior.length / this.cardsPerPage));
     }
   },
   watch: {
     currentPage() {
-      this.animatePage();
+      this.$nextTick(() => {
+        this.animatePage();
+      });
+    },
+    seniorFilter() {
+      this.seniorPage = 0;
+    },
+    juniorFilter() {
+      this.juniorPage = 0;
+    },
+    filteredSenior() {
+      if (this.seniorPage >= this.seniorPageCount) {
+        this.seniorPage = Math.max(0, this.seniorPageCount - 1);
+      }
+    },
+    filteredJunior() {
+      if (this.juniorPage >= this.juniorPageCount) {
+        this.juniorPage = Math.max(0, this.juniorPageCount - 1);
+      }
     }
   },
   methods: {
@@ -75,10 +112,25 @@ createApp({
     },
     handleWheel(e) {
       if (this.isTransitioning) return;
+
+      const currentSection = document.querySelectorAll('.page')[this.currentPage];
+      const scrollable = currentSection?.querySelector('.page-content');
+      const delta = e.deltaY;
+
+      const canScroll = scrollable && scrollable.scrollHeight > scrollable.clientHeight + 1;
+      if (canScroll) {
+        const atTop = scrollable.scrollTop <= 0;
+        const atBottom = scrollable.scrollHeight - scrollable.clientHeight - scrollable.scrollTop <= 1;
+
+        if ((delta > 0 && !atBottom) || (delta < 0 && !atTop)) {
+          return;
+        }
+      }
+
       e.preventDefault();
-      if (e.deltaY > 0 && this.currentPage < this.pages.length - 1) {
+      if (delta > 0 && this.currentPage < this.pages.length - 1) {
         this.currentPage++;
-      } else if (e.deltaY < 0 && this.currentPage > 0) {
+      } else if (delta < 0 && this.currentPage > 0) {
         this.currentPage--;
       }
     },
@@ -93,12 +145,8 @@ createApp({
     animatePage() {
       if (this.isTransitioning) return;
       this.isTransitioning = true;
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
       const currentSection = document.querySelectorAll('.page')[this.currentPage];
       if (currentSection) {
-        currentSection.classList.add('active');
         const timeline = this.animatePageEntrance(currentSection, this.pages[this.currentPage]);
         if (timeline && typeof timeline.eventCallback === 'function') {
           timeline.eventCallback('onComplete', () => {
@@ -110,6 +158,18 @@ createApp({
       } else {
         this.isTransitioning = false;
       }
+    },
+    prevSeniorPage() {
+      if (this.seniorPage > 0) this.seniorPage -= 1;
+    },
+    nextSeniorPage() {
+      if (this.seniorPage < this.seniorPageCount - 1) this.seniorPage += 1;
+    },
+    prevJuniorPage() {
+      if (this.juniorPage > 0) this.juniorPage -= 1;
+    },
+    nextJuniorPage() {
+      if (this.juniorPage < this.juniorPageCount - 1) this.juniorPage += 1;
     },
     animatePageEntrance(pageElement, pageName) {
       const cards = Array.from(pageElement.querySelectorAll('.featured-card, .project-card'));

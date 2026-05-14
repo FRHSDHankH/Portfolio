@@ -1,0 +1,285 @@
+{
+  "years": [
+    {
+      "year": "Senior",
+      "label": "Year 3 — Senior",
+      "tagline": "Vue.js, JSON-driven apps, and full client builds.",
+      "projects": [
+        {
+          "title": "JAMissions",
+          "slug": "jamissions",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/JAMissions/",
+          "shotWait": 20,
+          "description": "A dynamic Vue.js application that brings the JAMissions experience to the web — components, routing, and JSON-driven content.",
+          "skills": ["Vue.js", "Components", "JSON", "Fetch API", "Responsive CSS"],
+          "reflection": "This was the project where Vue finally clicked for me — splitting the UI into components and letting reactive data drive the page felt like a real shift in how I think about building sites.",
+          "featured": true,
+          "tags": ["Vue", "App"]
+        },
+        {
+          "title": "Parking Spots MHS",
+          "slug": "parking-spots",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/ParkingSpotsMHS/",
+          "description": "A real client-style site to help students find and claim parking spots at MHS — built with dynamic data, filtering, and a clean UI.",
+          "skills": ["Vue.js", "JSON Data", "UX Design", "Filtering"],
+          "reflection": "Designing for a real audience — actual students who would use this — taught me to think about UX decisions, not just visual ones. Every click had to make sense.",
+          "featured": true,
+          "tags": ["Vue", "Client"]
+        },
+        {
+          "title": "Christmas CarolOke",
+          "slug": "caroloke",
+          "year": "Senior",
+          "url": "https://jcarmichael9.github.io/Christmas-CarolOke/",
+          "description": "A holiday karaoke web app — a collaborative build with timed lyrics, song selection, and themed visuals.",
+          "skills": ["Collaboration", "Vue.js", "Audio", "Animation"],
+          "reflection": "First serious team build with another developer. We had to merge code, agree on style, and split features. Way harder than coding alone — and way more fun.",
+          "featured": true,
+          "tags": ["Vue", "Collab"]
+        },
+        {
+          "title": "Movie Poster Gallery",
+          "slug": "movie-posters",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/MoviePosterGallery/",
+          "description": "A responsive Vue gallery rendering movie posters dynamically from JSON.",
+          "skills": ["Vue.js", "JSON", "CSS Grid"]
+        },
+        {
+          "title": "Vue Mastery",
+          "slug": "vue-mastery",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/VueMastery/",
+          "description": "Practice ground for Vue concepts: directives, props, events, computed values.",
+          "skills": ["Vue.js", "Directives", "Components"]
+        },
+        {
+          "title": "Slideshow App",
+          "slug": "slideshow",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/SlideshowApp/",
+          "description": "An interactive slideshow component built in Vue with smooth transitions.",
+          "skills": ["Vue.js", "Transitions", "State"]
+        },
+        {
+          "title": "JSON Schedules",
+          "slug": "json-schedules",
+          "year": "Senior",
+          "url": "http://frhsdhankh.github.io/JSONSchedules/",
+          "description": "Renders schedule data fully from a JSON file — no hardcoded HTML.",
+          "skills": ["JSON", "jQuery", "Fetch"]
+        },
+        {
+          "title": "AJAX Basics",
+          "slug": "ajax-basics",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/2.02-AJAX-Basics/",
+          "description": "An intro to async data fetching and DOM rendering with jQuery + AJAX.",
+          "skills": ["AJAX", "jQuery", "Async"]
+        },
+        {
+          "title": "Event Listeners Refresher",
+          "slug": "event-listeners",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/1.03-Event-Listeners-Refresher/",
+          "description": "Practice with vanilla JS event handling and DOM interaction.",
+          "skills": ["JavaScript", "DOM", "Events"]
+        },
+        {
+          "title": "Arrays and Loops",
+          "slug": "arrays-loops",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/1.02-Arrays-and-Loops/",
+          "description": "Foundations refresher — array methods, loops, and rendering data.",
+          "skills": ["JavaScript", "Arrays", "Loops"]
+        },
+        {
+          "title": "Functions",
+          "slug": "functions",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/1.01-Functions/",
+          "description": "Function declarations, expressions, scope, and reusability.",
+          "skills": ["JavaScript", "Functions"]
+        },
+        {
+          "title": "College Recruitment Website",
+          "slug": "college-recruitment",
+          "year": "Senior",
+          "url": "https://frhsdhankh.github.io/CollegeRecruitmentWebsite/",
+          "description": "A personal recruitment-style site presenting my profile to colleges.",
+          "skills": ["HTML", "CSS", "Personal Branding"]
+        }
+      ]
+    },
+    {
+      "year": "Junior",
+      "label": "Year 2 — Junior",
+      "tagline": "JavaScript, jQuery, and full client builds — the year things got real.",
+      "projects": [
+        {
+          "title": "Little Bird Toy Company",
+          "slug": "little-bird",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/LittleBirdToyCompany/",
+          "description": "A full multi-page site for a fictional toy company — branding, navigation, product pages, and responsive design from scratch.",
+          "skills": ["HTML", "CSS", "Bootstrap", "Responsive", "Branding"],
+          "reflection": "My first end-to-end client-style site. Building a brand, not just a page, made everything click — typography, color, and consistency suddenly mattered.",
+          "featured": true,
+          "tags": ["Client", "Multi-page"]
+        },
+        {
+          "title": "Hankman",
+          "slug": "hankman",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/Hankman/",
+          "description": "A custom hangman-style word game — game logic, win/lose states, and animated feedback.",
+          "skills": ["JavaScript", "Game Logic", "DOM"],
+          "reflection": "Writing the game-state logic was the first time I really had to think like a programmer instead of a page designer. Every edge case mattered.",
+          "featured": true,
+          "tags": ["Game", "JS"]
+        },
+        {
+          "title": "RPS Game (Jan Monthly)",
+          "slug": "rps",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/JanMonthlyWebsite-RPSGame/",
+          "description": "Rock-Paper-Scissors built with JavaScript — randomized AI moves, score tracking, and themed visuals.",
+          "skills": ["JavaScript", "Random Logic", "DOM"],
+          "reflection": "Tiny project, big lesson — getting score state to update reliably across rounds taught me about clean function design.",
+          "featured": true,
+          "tags": ["Game", "JS"]
+        },
+        {
+          "title": "Cars Roster",
+          "slug": "cars-roster",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/CarsRoster/roster.html",
+          "description": "A roster page rendering car data dynamically — early intro to data-driven layout.",
+          "skills": ["JavaScript", "Objects", "DOM"]
+        },
+        {
+          "title": "State Facts",
+          "slug": "state-facts",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/State-Facts-Objects-Practice/",
+          "description": "Practice with JS objects displaying U.S. state facts.",
+          "skills": ["JavaScript", "Objects"]
+        },
+        {
+          "title": "April: Camaro Site",
+          "slug": "camaro",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/AprilMonthlyWebsite-Camaro/",
+          "description": "A themed monthly site dedicated to the Chevy Camaro.",
+          "skills": ["HTML", "CSS", "Layout"]
+        },
+        {
+          "title": "Monthly Website Gallery",
+          "slug": "monthly-gallery",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/MonthlyWebsiteGallery/",
+          "description": "A gallery hub linking all my monthly project sites together.",
+          "skills": ["HTML", "CSS", "Navigation"]
+        },
+        {
+          "title": "Feb: Presidential Biography",
+          "slug": "presidential",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/FebMonthlyWebsite-PresidentialBiography/index.html",
+          "description": "A long-form biography site with structured content sections.",
+          "skills": ["HTML", "CSS", "Typography"]
+        },
+        {
+          "title": "To-Do List",
+          "slug": "todo",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/ToDoList/",
+          "description": "Add, check, and remove tasks — classic JS DOM project.",
+          "skills": ["JavaScript", "DOM", "LocalStorage"]
+        },
+        {
+          "title": "Postcard Generator",
+          "slug": "postcard",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/Postcard-Generator/",
+          "description": "Generates a custom postcard from user inputs.",
+          "skills": ["JavaScript", "Forms", "DOM"]
+        },
+        {
+          "title": "Random Testimonial",
+          "slug": "testimonial",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/RandomTestamonialStarter/",
+          "description": "Cycles through testimonials at random with smooth swaps.",
+          "skills": ["JavaScript", "Arrays", "DOM"]
+        },
+        {
+          "title": "Dec: Name Generator",
+          "slug": "name-gen",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/DecMonthlyWebsite-NameGenerator/",
+          "description": "Random name generator with themed UI.",
+          "skills": ["JavaScript", "Random"]
+        },
+        {
+          "title": "Magic 8 Ball",
+          "slug": "magic-8",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/MagicEightBall/",
+          "description": "Ask a question, shake the ball, get an answer — animated and themed.",
+          "skills": ["JavaScript", "Animation", "Random"]
+        },
+        {
+          "title": "Nov: Word Salad",
+          "slug": "word-salad",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/NovMonthlyWebsite-WordSalad/",
+          "description": "Mad-libs style randomized sentence builder.",
+          "skills": ["JavaScript", "Strings"]
+        },
+        {
+          "title": "Spooky Ghost",
+          "slug": "ghost",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/SpookyGhost/",
+          "description": "CSS-art ghost with animations — pure HTML/CSS challenge.",
+          "skills": ["CSS", "Animation"]
+        },
+        {
+          "title": "Cute Spider",
+          "slug": "spider",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/CuteSpider/",
+          "description": "CSS-only spider character — shapes, transforms, animation.",
+          "skills": ["CSS", "Transforms"]
+        },
+        {
+          "title": "Oct: Look Ma I'm Famous",
+          "slug": "famous",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/OctMonthlyWebsite-LookMaImFamous/",
+          "description": "An over-the-top fan-style site — all about going big visually.",
+          "skills": ["HTML", "CSS", "Layout"]
+        },
+        {
+          "title": "Summer-tainment",
+          "slug": "summertainment",
+          "year": "Junior",
+          "url": "https://frhsdhankh.github.io/Summer-tainment-Site/",
+          "description": "A summer entertainment hub — first real multi-section project.",
+          "skills": ["HTML", "CSS"]
+        }
+      ]
+    },
+    {
+      "year": "Sophomore",
+      "label": "Year 1 — Sophomore",
+      "tagline": "The lost archive.",
+      "missingMessage": "404 — Sophomore Year Not Found",
+      "missingDetail": "All my sophomore-year projects mysteriously vanished from the server. The leading theories: my dog ate the homework, the cloud rained on them, or a rogue <marquee> tag took them all down. RIP. The skills, however, survived: HTML structure, CSS basics, and the very first time I ever wrote console.log('hello world').",
+      "projects": []
+    }
+  ]
+}

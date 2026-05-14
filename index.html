@@ -1,183 +1,447 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Hank's Portfolio</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hank Habashy — Web Design Portfolio</title>
+  <meta name="description" content="Senior capstone portfolio — three years in the Web Design Pathway Program: projects, growth, and what comes next." />
 
-  <body>
-    <div id="app">
-      <!-- Loading Screen -->
-      <div v-if="!projectsLoaded" class="loading-screen">
-        <div class="loading-content">
-          <div class="loader"></div>
-          <p>Loading portfolio...</p>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 (responsive grid + utilities) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+
+  <!-- Stylesheet (loaded after Bootstrap so our custom design wins) -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Vue 3 + GSAP (CDN) -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <!-- ============ PRELOADER ============ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-bg"></div>
+    <div class="preloader-content">
+      <div class="preloader-word">
+        <span>h</span><span>a</span><span>n</span><span>k</span><span>&nbsp;</span><span>h</span><span>a</span><span>b</span><span>a</span><span>s</span><span>h</span><span>y</span><span>.</span>
+      </div>
+      <div class="preloader-meta">
+        <span class="preloader-label">loading portfolio</span>
+        <span class="preloader-count" id="preloader-count">0</span>
+      </div>
+      <div class="preloader-bar"><span id="preloader-fill"></span></div>
+    </div>
+    <div class="preloader-curtain" id="preloader-curtain"></div>
+  </div>
+
+  <!-- Interactive particle canvas (background, behind blobs) -->
+  <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Animated background grain + gradient blobs -->
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Custom cursor (desktop only) -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Vue mount root -->
+  <div id="app">
+
+    <!-- ============ NAV ============ -->
+    <header class="nav">
+      <a href="#top" class="nav-logo" data-magnetic>
+        <span class="logo-mark">H</span>
+        <span class="logo-name">habashy.</span>
+      </a>
+      <nav class="nav-links" :class="{ open: navOpen }">
+        <a href="#about" @click="navOpen=false">About</a>
+        <a href="#garage" @click="navOpen=false">Garage</a>
+        <a href="#featured" @click="navOpen=false">Featured</a>
+        <a href="#portfolio" @click="navOpen=false">Portfolio</a>
+        <a href="#reflection" @click="navOpen=false">Reflection</a>
+        <a href="#future" @click="navOpen=false">Future</a>
+      </nav>
+      <button class="nav-toggle" :aria-expanded="navOpen" @click="navOpen = !navOpen" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section id="top" class="hero">
+      <div class="hero-inner hero-grid">
+        <div class="hero-text">
+        <p class="eyebrow reveal">Web Design Pathway · Senior Capstone · powered by Red&nbsp;Bull</p>
+        <h1 class="hero-title reveal">
+          <span class="line"><em>Three years</em></span>
+          <span class="line">of building, breaking,</span>
+          <span class="line">and shipping the&nbsp;web.</span>
+        </h1>
+
+        <!-- Rotating identity word -->
+        <div class="hero-rotator reveal" aria-hidden="true">
+          <span class="hero-rotator-prefix">i&apos;m a</span>
+          <span class="hero-rotator-words" id="rotator">
+            <span class="is-active">designer</span>
+            <span>developer</span>
+            <span>debugger</span>
+            <span>storyteller</span>
+            <span>problem-solver</span>
+          </span>
+        </div>
+
+        <p class="hero-sub reveal">
+          I'm <strong>Hank Habashy</strong> — a high-school senior who turned
+          “<span class="hl">how does this website work</span>” into a portfolio of games,
+          client builds, and Vue-powered apps that occasionally <em>do</em> work on the first try.
+        </p>
+        <div class="hero-cta reveal">
+          <a href="#featured" class="btn btn-primary" data-magnetic>See the work →</a>
+          <a href="#about" class="btn btn-ghost" data-magnetic>About me</a>
+        </div>
+        <div class="hero-meta reveal">
+          <div><span class="num">{{ stats.totalProjects }}+</span><span>projects shipped</span></div>
+          <div><span class="num">3</span><span>years in the program</span></div>
+          <div><span class="num">∞</span><span>console.logs survived</span></div>
+          <div><span class="num">1</span><span>black Camaro</span></div>
+        </div>
+        </div>
+
+        <aside class="hero-visual reveal" aria-hidden="true" data-portrait-tilt>
+          <div class="hero-visual-frame">
+            <div class="hero-blob hero-blob-a"></div>
+            <div class="hero-blob hero-blob-b"></div>
+            <img v-if="images.portrait" :src="images.portrait.src" alt="" class="hero-portrait" />
+            <div class="hero-sheen" aria-hidden="true"></div>
+          </div>
+        </aside>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <span>scroll</span>
+        <span class="arrow">↓</span>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE STRIP ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>BUILT •</span><span>BROKEN •</span><span>SHIPPED •</span><span>REPEAT •</span>
+        <span>HTML •</span><span>CSS •</span><span>JAVASCRIPT •</span><span>VUE •</span><span>JSON •</span><span>jQUERY •</span>
+        <span class="star">✦</span>
+        <span>BUILT •</span><span>BROKEN •</span><span>SHIPPED •</span><span>REPEAT •</span>
+        <span>HTML •</span><span>CSS •</span><span>JAVASCRIPT •</span><span>VUE •</span><span>JSON •</span><span>jQUERY •</span>
+        <span class="star">✦</span>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="section">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2 class="section-title reveal">About me.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-card reveal">
+          <p class="lead">
+            I'm a senior at <strong>Marlboro High School</strong>, graduating in 2026 and headed to
+            <strong>Rutgers University — New Brunswick</strong> to double major in
+            <strong>Electrical &amp; Computer Engineering</strong>. I came into the Web
+            Design Pathway Program knowing roughly that you typed angle brackets to make a
+            webpage. Three years later I'm building Vue apps that pull data from JSON,
+            designing for real users, and actually <em>liking</em> the part where things break.
+          </p>
+          <p>
+            Outside of code my life looks like this: kicking a soccer ball around, summers at
+            the beach house with my cousins, way too many hours on video games, driving my
+            black Camaro nowhere in particular, and a lot of time at church. I'm the kind of
+            person who'll spend two hours fixing a 1px alignment problem at 11pm — not because
+            anyone asked, but because I noticed it and now I can't unsee it. That instinct is
+            the thing this program built in me, and it's the thing I plan to take everywhere
+            I go next.
+          </p>
+          <ul class="about-facts">
+            <li><span>📍</span> Marlboro High School · Class of 2026</li>
+            <li><span>🎓</span> Rutgers University, New Brunswick · EE + CompE (double major)</li>
+            <li><span>⛪</span> A lot of time at church</li>
+            <li><span>⚽</span> Soccer when I can get a game going</li>
+            <li><span>🏖️</span> Beach house summers with the cousins</li>
+            <li><span>🎮</span> Video games (more than I'll admit)</li>
+            <li><span>🚗</span> Daily driver: black Chevy Camaro</li>
+            <li><span>💻</span> Stack: HTML · CSS · JS · jQuery · Vue · JSON</li>
+          </ul>
+        </div>
+
+        <figure class="about-portrait reveal">
+          <div class="portrait-frame">
+            <img
+              v-if="images.portrait"
+              :src="images.portrait.src"
+              :alt="images.portrait.alt"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption v-if="images.portrait">
+            <span class="dot"></span>{{ images.portrait.caption }}
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ CAMARO GALLERY ============ -->
+    <section id="garage" class="section garage-section">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2 class="section-title reveal">Off-screen.</h2>
+        <p class="section-sub reveal">
+          When I'm not staring at a code editor, I'm usually somewhere with this car.
+          A small love letter to my black Camaro — the unofficial mascot of this portfolio.
+        </p>
+      </div>
+
+      <div class="photo-marquee" aria-label="Camaro photo gallery">
+        <div class="photo-marquee-track">
+          <figure
+            v-for="(img, i) in galleryLoop"
+            :key="'g' + i"
+            class="photo-card"
+            :style="{ '--rot': (img.rot || 0) + 'deg' }"
+          >
+            <img :src="img.src" :alt="img.alt" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED (horizontal-scroll on desktop) ============ -->
+    <section id="featured" class="section featured-section">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2 class="section-title reveal">Featured work.</h2>
+        <p class="section-sub reveal">
+          The projects I'd hand someone if they asked "what can you do?" — 2–3 from each year.
+        </p>
+        <p class="section-hint reveal">
+          <span class="badge-mono">scroll ↓</span>
+          to slide through them →
+        </p>
+      </div>
+
+      <div v-if="loading" class="loading">Loading projects…</div>
+
+      <!-- Pinned horizontal scroll track (desktop). Falls back to vertical grid via CSS on mobile. -->
+      <div v-else class="h-scroll-wrap" id="hScrollWrap">
+        <div class="h-scroll-track" id="hScrollTrack">
+          <article
+            v-for="(p, i) in featuredProjects"
+            :key="p.slug"
+            class="feature-card tilt h-panel"
+            :style="{ '--i': i }"
+            data-magnetic-strong
+          >
+            <div class="feature-card-inner">
+              <a :href="p.url" target="_blank" rel="noopener" class="feature-shot" :aria-label="'Open ' + p.title">
+                <img :src="shotUrl(p.url, 900, p.shotWait)" :alt="p.title + ' — live screenshot'" loading="eager" fetchpriority="high" decoding="async" @error="onShotError" @load="onShotLoad" />
+              </a>
+              <div class="feature-meta">
+                <span class="chip">{{ p.year }}</span>
+                <span v-for="t in (p.tags || [])" :key="t" class="chip chip-ghost">{{ t }}</span>
+              </div>
+              <span class="feature-index">{{ String(i + 1).padStart(2, '0') }} / {{ String(featuredProjects.length).padStart(2, '0') }}</span>
+              <h3 class="feature-title">{{ p.title }}</h3>
+              <p class="feature-desc">{{ p.description }}</p>
+
+              <div class="feature-section">
+                <h4>Skills</h4>
+                <ul class="skills">
+                  <li v-for="s in p.skills" :key="s">{{ s }}</li>
+                </ul>
+              </div>
+
+              <div class="feature-section" v-if="p.reflection">
+                <h4>Reflection</h4>
+                <p class="reflection">{{ p.reflection }}</p>
+              </div>
+
+              <a :href="p.url" target="_blank" rel="noopener" class="feature-link">
+                Visit project <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PORTFOLIO (ALL) ============ -->
+    <section id="portfolio" class="section">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2 class="section-title reveal">The full portfolio.</h2>
+        <p class="section-sub reveal">
+          Every project, every year. Filter by year — or just scroll the whole timeline.
+        </p>
+      </div>
+
+      <div class="year-tabs reveal">
+        <button
+          v-for="y in years"
+          :key="y.year"
+          class="year-tab"
+          :class="{ active: activeYear === y.year }"
+          @click="activeYear = y.year"
+        >
+          <span class="year-tab-label">{{ y.label }}</span>
+          <span class="year-tab-count">{{ y.projects.length }}</span>
+        </button>
+      </div>
+
+      <div class="year-tagline reveal" v-if="currentYear">
+        <p>{{ currentYear.tagline }}</p>
+      </div>
+
+      <!-- Sophomore: missing year placeholder -->
+      <div v-if="currentYear && currentYear.year === 'Sophomore'" class="missing-year">
+        <div class="missing-card">
+          <div class="missing-glitch" data-text="404">404</div>
+          <h3>{{ currentYear.missingMessage }}</h3>
+          <p>{{ currentYear.missingDetail }}</p>
+          <div class="missing-tags">
+            <span>🐶 dog ate it</span>
+            <span>☁️ cloud rained</span>
+            <span>📼 lost media</span>
+            <span>👻 haunted server</span>
+          </div>
         </div>
       </div>
 
-      <!-- Fullscreen Pages Container -->
-      <div class="pages-container">
-        
-      <!-- HOME PAGE -->
-        <section class="page home-page" :class="{ active: currentPage === 0 }">
-          <div class="page-content">
-            <div class="hero-text">
-              <h1 class="title">Hank's Portfolio</h1>
-              <p class="subtitle">A journey through code, creativity & continuous learning</p>
-              <p class="subsubtitle">Senior • Class of 2026</p>
-              <div class="scroll-indicator">
-                <span>Scroll to explore</span>
-                <div class="arrow">↓</div>
-              </div>
-            </div>
+      <!-- All other years -->
+      <div v-else class="row g-3">
+        <div
+          v-for="p in currentYear?.projects"
+          :key="p.slug"
+          class="col-12 col-sm-6 col-lg-4 d-flex"
+        >
+          <a
+            :href="p.url"
+            target="_blank"
+            rel="noopener"
+            class="project-card w-100"
+            data-magnetic
+          >
+          <div class="project-shot">
+            <img :src="shotUrl(p.url, 600, p.shotWait)" :alt="p.title + ' — live screenshot'" loading="lazy" decoding="async" @error="onShotError" />
           </div>
-        </section>
-
-        <!-- FEATURED PAGE -->
-        <section class="page featured-page" :class="{ active: currentPage === 1 }">
-          <div class="page-content">
-            <h2 class="page-title">Featured Projects</h2>
-            <div class="featured-grid">
-              <a v-for="project in featuredProjects" :key="project.id" 
-                 :href="project.url" target="_blank"
-                 class="featured-card">
-                <div class="card-icon">{{ project.image }}</div>
-                <h3>{{ project.title }}</h3>
-                <p>{{ project.description }}</p>
-                <span class="year-badge">{{ project.year }}</span>
-              </a>
-            </div>
+          <div class="project-card-head">
+            <h3>{{ p.title }}</h3>
+            <span class="arrow" aria-hidden="true">↗</span>
           </div>
-        </section>
-
-        <!-- SENIOR PROJECTS PAGE -->
-        <section class="page senior-page" :class="{ active: currentPage === 2 }">
-          <div class="page-content">
-            <h2 class="page-title">Senior Year</h2>
-            <div class="filter-controls">
-              <button class="filter-btn" :class="{ active: !seniorFilter }" @click="seniorFilter = null">All</button>
-              <button class="filter-btn" :class="{ active: seniorFilter === 'Beginner' }" @click="seniorFilter = 'Beginner'">Beginner</button>
-              <button class="filter-btn" :class="{ active: seniorFilter === 'Intermediate' }" @click="seniorFilter = 'Intermediate'">Intermediate</button>
-              <button class="filter-btn" :class="{ active: seniorFilter === 'Advanced' }" @click="seniorFilter = 'Advanced'">Advanced</button>
-            </div>
-            <div class="projects-grid">
-              <a v-for="project in visibleSenior" :key="project.id" 
-                 :href="project.url" target="_blank"
-                 class="project-card">
-                <div class="card-header">
-                  <h3>{{ project.title }}</h3>
-                  <span class="difficulty-badge" :class="project.difficulty.toLowerCase()">
-                    {{ project.difficulty }}
-                  </span>
-                </div>
-                <p class="description">{{ project.description }}</p>
-                <div class="tags">
-                  <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
-                </div>
-              </a>
-            </div>
-            <div class="page-pagination">
-              <button class="page-nav-btn" @click="prevSeniorPage" :disabled="seniorPage === 0">Prev</button>
-              <span class="page-status">Page {{ seniorPage + 1 }} / {{ seniorPageCount }}</span>
-              <button class="page-nav-btn" @click="nextSeniorPage" :disabled="seniorPage >= seniorPageCount - 1">Next</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- JUNIOR PROJECTS PAGE -->
-        <section class="page junior-page" :class="{ active: currentPage === 3 }">
-          <div class="page-content">
-            <h2 class="page-title">Junior Year</h2>
-            <div class="filter-controls">
-              <button class="filter-btn" :class="{ active: !juniorFilter }" @click="juniorFilter = null">All</button>
-              <button class="filter-btn" :class="{ active: juniorFilter === 'Beginner' }" @click="juniorFilter = 'Beginner'">Beginner</button>
-              <button class="filter-btn" :class="{ active: juniorFilter === 'Intermediate' }" @click="juniorFilter = 'Intermediate'">Intermediate</button>
-              <button class="filter-btn" :class="{ active: juniorFilter === 'Advanced' }" @click="juniorFilter = 'Advanced'">Advanced</button>
-            </div>
-            <div class="projects-grid">
-              <a v-for="project in visibleJunior" :key="project.id" 
-                 :href="project.url" target="_blank"
-                 class="project-card">
-                <div class="card-header">
-                  <h3>{{ project.title }}</h3>
-                  <span class="difficulty-badge" :class="project.difficulty.toLowerCase()">
-                    {{ project.difficulty }}
-                  </span>
-                </div>
-                <p class="description">{{ project.description }}</p>
-                <div class="tags">
-                  <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
-                </div>
-              </a>
-            </div>
-            <div class="page-pagination">
-              <button class="page-nav-btn" @click="prevJuniorPage" :disabled="juniorPage === 0">Prev</button>
-              <span class="page-status">Page {{ juniorPage + 1 }} / {{ juniorPageCount }}</span>
-              <button class="page-nav-btn" @click="nextJuniorPage" :disabled="juniorPage >= juniorPageCount - 1">Next</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- SOPHOMORE PAGE (404 Fun) -->
-        <section class="page sophomore-page" :class="{ active: currentPage === 4 }">
-          <div class="page-content">
-            <div class="error-container">
-              <div class="error-code">404</div>
-              <h2 v-if="projects.sophomore">{{ projects.sophomore.message }}</h2>
-              <h2 v-else>Loading...</h2>
-              <p v-if="projects.sophomore">{{ projects.sophomore.description }}</p>
-              <div class="error-messages" v-if="projects.sophomore">
-                <p v-for="msg in projects.sophomore.subMessages" :key="msg" class="error-msg">
-                  {{ msg }}
-                </p>
-              </div>
-              <div class="dog-emoji">🐕</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ABOUT PAGE -->
-        <section class="page about-page" :class="{ active: currentPage === 5 }">
-          <div class="page-content">
-            <h2 class="page-title">About This Portfolio</h2>
-            <div class="about-content">
-              <div class="about-section">
-                <h3>Development Journey</h3>
-                <p>This portfolio showcases my growth as a web developer from Junior through Senior year. Spanning multiple years of coursework, projects, and continuous learning.</p>
-              </div>
-              <div class="about-section">
-                <h3>Built With Modern Tech</h3>
-                <p>Built with cutting-edge web technologies including Vue.js, GSAP animations, modern CSS, and responsive design principles. Featuring smooth full-page navigation and interactive animations.</p>
-              </div>
-              <div class="tech-stack">
-                <span class="tech-badge">HTML5</span>
-                <span class="tech-badge">CSS3</span>
-                <span class="tech-badge">JavaScript</span>
-                <span class="tech-badge">Vue.js</span>
-                <span class="tech-badge">GSAP</span>
-                <span class="tech-badge">JSON</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
+          <p>{{ p.description }}</p>
+          <ul class="skills small">
+            <li v-for="s in p.skills" :key="s">{{ s }}</li>
+          </ul>
+        </a>
+        </div>
       </div>
+    </section>
 
-    </div>
+    <!-- ============ REFLECTION (scroll-scrubbed words) ============ -->
+    <section id="reflection" class="section reflection-section">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2 class="section-title reveal">Reflection.</h2>
+      </div>
+      <div class="long-read scrub-read" data-scrub>
+        <p>
+          Three years ago I walked into Web Design I thinking it would be a CSS class — pretty
+          colors, pretty fonts, an easy elective. The first time I got an event listener to
+          actually fire on a button I clicked, something rewired in my brain. I had built a
+          thing that responded to me. That's the moment this whole portfolio starts.
+        </p>
+        <p>
+          Sophomore year was foundations, even if the projects themselves are now lost media
+          (RIP — see the 404 above). Junior year is when it got real: Hankman taught me to
+          think in states, not pages; Little Bird Toy Company taught me that a website is a
+          brand, not a file. By the end of that year I stopped asking "what does this look
+          like?" and started asking "what does this do?"
+        </p>
+        <p>
+          Senior year was the leap. JAMissions and ParkingSpotsMHS forced me to think in
+          components, in data, in users. JSON, fetch, Vue — the words went from intimidating
+          to tools I reach for without thinking. Working with another developer on Christmas
+          CarolOke showed me that real software is a conversation, not a solo performance.
+        </p>
+        <p>
+          What I'm proudest of isn't a single project. It's that I can now look at a blank
+          editor and not panic. I know how to research, plan, build, break, fix, and ship.
+          That's a skill I didn't have at 15, and I'll carry it forever.
+        </p>
+      </div>
+    </section>
 
-    <!-- Vue 3 (production build for deployment) -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js"></script>
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <!-- Test script -->
-    <script>
-      console.log('Scripts loaded');
-      console.log('Vue available:', typeof Vue);
-      console.log('GSAP available:', typeof gsap);
-    </script>
-    <!-- Main Script -->
-    <script src="script.js"></script>
-  </body>
+    <!-- ============ FUTURE ============ -->
+    <section id="future" class="section">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2 class="section-title reveal">Where I'm headed.</h2>
+      </div>
+      <div class="future-grid">
+        <div class="future-text reveal">
+          <p>
+            After graduation I'm headed to <strong>Rutgers University — New Brunswick</strong>
+            to double major in <strong>Electrical Engineering</strong> and
+            <strong>Computer Engineering</strong>. The Web Design Pathway Program is the
+            reason that path feels obvious to me — it's where I learned that I actually
+            <em>like</em> sitting with a hard problem until it cracks. Web design taught me the
+            software side; engineering at Rutgers is going to teach me the hardware that lives
+            underneath it. Long-term I want to work on the seam between the two: embedded systems,
+            firmware UIs, hardware that actually feels good to use. The skills I built here
+            (JSON-driven UIs, component thinking, designing for mobile first, presenting work
+            to a real audience) are the literal foundation I'm building everything else on top of.
+          </p>
+        </div>
+        <ul class="future-list reveal">
+          <li><span class="dot"></span> Rutgers University — New Brunswick</li>
+          <li><span class="dot"></span> Double major: Electrical + Computer Engineering</li>
+          <li><span class="dot"></span> Get into embedded systems / firmware</li>
+          <li><span class="dot"></span> Keep shipping side-projects on the web</li>
+          <li><span class="dot"></span> Build something thousands of people actually use</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="footer-mega" aria-hidden="true">
+        <div class="footer-mega-line"><span>let&apos;s</span></div>
+        <div class="footer-mega-line outline"><span>build</span></div>
+        <div class="footer-mega-line"><span>something.</span></div>
+      </div>
+      <div class="footer-inner">
+        <div>
+          <p class="footer-title">Thanks for scrolling all the way down.</p>
+          <p class="footer-sub">Built from scratch with Vue 3, GSAP, and an unhealthy amount of coffee.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/frhsdhankh" target="_blank" rel="noopener">GitHub ↗</a></li>
+          <li><a href="#top">Back to top ↑</a></li>
+        </ul>
+      </div>
+      <p class="footer-copy">© 2026 Hank Habashy · Web Design Pathway Program · Marlboro High School</p>
+    </footer>
+
+  </div>
+</body>
 </html>

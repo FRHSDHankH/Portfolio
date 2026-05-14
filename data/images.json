@@ -1,0 +1,21 @@
+{
+  "portrait": {
+    "src": "images/IMG_2173.JPG",
+    "alt": "Hank Habashy — senior portrait, Class of 2026",
+    "caption": "Senior portrait · Class of 2026"
+  },
+  "camaro": [
+    { "src": "images/IMG_2174.JPG", "alt": "Camaro at night, Christmas lights",  "rot":  -3 },
+    { "src": "images/IMG_2175.JPG", "alt": "Camaro side profile",                 "rot":   2 },
+    { "src": "images/IMG_2176.JPG", "alt": "Camaro detail",                       "rot":  -1 },
+    { "src": "images/IMG_2177.JPG", "alt": "Camaro headlights",                   "rot":   3 },
+    { "src": "images/IMG_2178.JPG", "alt": "Camaro front end",                    "rot":  -2 },
+    { "src": "images/IMG_2179.JPG", "alt": "Camaro wheel",                        "rot":   1 },
+    { "src": "images/IMG_2180.JPG", "alt": "Camaro on the road",                  "rot":  -3 },
+    { "src": "images/IMG_2181.JPG", "alt": "Camaro at golden hour",               "rot":   2 },
+    { "src": "images/IMG_2182.JPG", "alt": "Camaro rear",                         "rot":  -1 },
+    { "src": "images/IMG_2183.JPG", "alt": "Camaro interior",                     "rot":   3 },
+    { "src": "images/IMG_2184.JPG", "alt": "Camaro parked",                       "rot":  -2 },
+    { "src": "images/IMG_2185.JPG", "alt": "Camaro detail shot",                  "rot":   1 }
+  ]
+}
